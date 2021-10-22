@@ -3,6 +3,8 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +17,8 @@ public class AdminAccountActivity extends MainActivity {
     EditText username;
     EditText password;
     EditText rank;
+    EditText name;
+    EditText email;
     Button btnAddAccount;
 
     @Override
@@ -25,6 +29,8 @@ public class AdminAccountActivity extends MainActivity {
         username    = (EditText)findViewById(R.id.textUsername);
         password    = (EditText)findViewById(R.id.textPassword);
         rank        = (EditText)findViewById(R.id.textRank);
+        email       = (EditText)findViewById(R.id.textEmail);
+        name        = (EditText)findViewById(R.id.textName);
         btnAddAccount = (Button)findViewById(R.id.btnAddAccount);
 
         AddData();
@@ -35,14 +41,32 @@ public class AdminAccountActivity extends MainActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        boolean isInserted = myDB.insertData(username.getText().toString(),
-                                        password.getText().toString(),
-                                        rank.getText().toString() );
 
-                        if( isInserted == true )
-                            Toast.makeText(AdminAccountActivity.this, "Data inserted", Toast.LENGTH_LONG).show();
+                        Cursor res = myDB.dbLogin(username.getText().toString());
+
+                        if(res.getCount() == 0 )
+                        {
+                            boolean isInserted = myDB.insertData(username.getText().toString(),
+                                    password.getText().toString(),
+                                    rank.getText().toString(),
+                                    email.getText().toString(),
+                                    name.getText().toString() );
+
+                            if( isInserted == true )
+                            {
+                                Toast.makeText(AdminAccountActivity.this, "Data inserted", Toast.LENGTH_LONG).show();
+                                Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(myIntent);
+
+                            }
+                             else
+                                Toast.makeText(AdminAccountActivity.this, "Data not inserted", Toast.LENGTH_LONG).show();
+                        }
                         else
-                            Toast.makeText(AdminAccountActivity.this, "Data not inserted", Toast.LENGTH_LONG).show();
+                        {
+                            showMessage("Username already in use!", "Please select a different username");
+                        }
+
                     }
                 }
         );
