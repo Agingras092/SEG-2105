@@ -46,7 +46,7 @@ public class AdminAccountActivity extends MainActivity {
 
                         if(res.getCount() == 0 )
                         {
-                            boolean isInserted = myDB.insertData(username.getText().toString(),
+                            boolean isInserted = myDB.insertAccount(username.getText().toString(),
                                     password.getText().toString(),
                                     rank.getText().toString(),
                                     email.getText().toString(),

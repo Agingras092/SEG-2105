@@ -21,14 +21,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String EMAIL = "EMAIL";
     public static final String NAME = "NAME";
 
+    public static final String TABLE_NAME2 = "class_table";
+    public static final String DATABASE_NAME2 = "Class.db";
+
+    public static final String CLASSID = "ID";
+    public static final String CLASSNAME = "CLASSNAME";
+    public static final String CLASSDESC = "CLASSDESC";
+
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
-        //SQLiteDatabase db = this.getWritableDatabase(); //REMAKE DATABASE
+        SQLiteDatabase db = this.getWritableDatabase(); //REMAKE DATABASE
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, USERNAME TEXT, NAME TEXT, EMAIL TEXT, PASSWORD TEXT, RANK INTEGER)");
+        sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME2 + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, CLASSNAME TEXT, CLASSDESC TEXT)");
     }
 
     @Override
@@ -37,7 +45,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public boolean insertData(String username, String password, String rank, String name, String email) {
+    public boolean insertAccount(String username, String password, String rank, String name, String email) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -54,15 +62,73 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public Cursor getAllData() {
+    public boolean insertClass(String classname, String classdesc) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(CLASSNAME, classname);
+        contentValues.put(CLASSDESC, classdesc);
+
+        long result = sqLiteDatabase.insert(TABLE_NAME2, null, contentValues);
+
+        if( result == -1 ) return false;
+
+        return true;
+    }
+
+    public boolean deleteClass(String classname) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(CLASSNAME, classname);
+
+        long result = sqLiteDatabase.delete(TABLE_NAME2, "classname=?", new String[]{classname});
+
+        if( result == -1 ) return false;
+
+        return true;
+    }
+
+    public boolean deleteAccount(String username)
+    {
+        Cursor res = getAllAccounts();
+
+        if(res.getCount() <= 1) return false; //cant remove last account;
+
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(CLASSNAME, username);
+
+        long result = sqLiteDatabase.delete(TABLE_NAME, "username=?", new String[]{username});
+
+        if( result == -1 ) return false;
+
+        return true;
+    }
+
+    public Cursor getAllAccounts() {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         Cursor res = sqLiteDatabase.rawQuery("select * from " + TABLE_NAME, null);
+        return res;
+    }
+
+    public Cursor getAllClasses() {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        Cursor res = sqLiteDatabase.rawQuery("select * from " + TABLE_NAME2, null);
         return res;
     }
 
     public Cursor dbLogin(String username) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         String query = "select * from "+TABLE_NAME+" where username = '" + username + "'";
+        Cursor res = sqLiteDatabase.rawQuery(query, null);
+        return res;
+    }
+
+    public Cursor verifyClassName(String classname) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        String query = "select * from "+TABLE_NAME2+" where classname = '" + classname + "'";
         Cursor res = sqLiteDatabase.rawQuery(query, null);
         return res;
     }

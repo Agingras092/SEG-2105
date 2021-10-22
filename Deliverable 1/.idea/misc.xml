@@ -4,6 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/owend/Desktop/SEG LABS/SEG-2105/Deliverable 1/app/src/main/res/layout/activity_admin_account.xml" value="0.25" />
+        <entry key="..\:/Users/owend/Desktop/SEG LABS/SEG-2105/Deliverable 1/app/src/main/res/layout/activity_admin_main.xml" value="0.22" />
+        <entry key="..\:/Users/owend/Desktop/SEG LABS/SEG-2105/Deliverable 1/app/src/main/res/layout/activity_create_class.xml" value="0.23958333333333334" />
+        <entry key="..\:/Users/owend/Desktop/SEG LABS/SEG-2105/Deliverable 1/app/src/main/res/layout/activity_delete_account.xml" value="0.2838541666666667" />
+        <entry key="..\:/Users/owend/Desktop/SEG LABS/SEG-2105/Deliverable 1/app/src/main/res/layout/activity_delete_class.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/owend/Desktop/SEG LABS/SEG-2105/Deliverable 1/app/src/main/res/layout/activity_main.xml" value="0.25" />
       </map>
     </option>

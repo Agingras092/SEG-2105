@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".DeleteAccount"
+            android:exported="true" />
+        <activity
+            android:name=".DeleteClass"
+            android:exported="true" />
+        <activity
+            android:name=".CreateClass"
+            android:exported="true" />
+        <activity
+            android:name=".ActivityAdminMain"
+            android:exported="true" />
+        <activity
             android:name=".AdminAccountActivity"
             android:exported="true" />
         <activity
