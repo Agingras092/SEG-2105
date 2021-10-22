@@ -1,0 +1,114 @@
+/*******************************************
+** Class:       User
+**
+** Description: Parent class for all
+**              user types.
+*******************************************/
+class User
+{
+  //Variables
+  username;
+  name; 
+  email;
+  password;
+  int role; 
+}
+
+/*******************************************
+** Class:       ActivtyAdminMain (0)
+**
+** Description: Manage all classes and
+**              other member accounts.
+**
+** Permissions: -Can create/delete classes
+**              -Can edit classes 
+**              -Can delete user accounts
+*******************************************/
+class ActivityAdminMain
+{
+  //Associations
+  1 -- * ClassType adminCreates;
+  1 -- * User adminManages;  
+}
+
+/*******************************************
+** Class:       ActivtyInstructorMain (1)
+**
+** Decription:  Books classes they'd like to
+**              teach.
+**
+** Permissions: -Can book classes
+**              -Select date, time,
+**               difficulty, and capacity
+*******************************************/
+class ActivityInstructorMain
+{
+}
+
+/*******************************************
+** Class:       ActivityMemberMain (2)
+**
+** Decription:  Browse classes to join and
+**              can drop out whenever. 
+**
+** Permissions: -Search classes by name
+**               or day of week
+**              -Join class if not full 
+**              -Drop from enrolled classes
+*******************************************/
+class ActivityMemberMain
+{
+}
+
+/*******************************************
+** Class:      ClassType
+**
+** Decription: Is used by admin to create
+**             different types of classes.
+*******************************************/
+class ClassType
+{
+  //Variables
+  name;
+  description;
+}
+
+
+/*******************************************
+** Class:      ActivityLogIn
+**
+** Decription: Allows users to log into
+**             the app. You start here.
+*******************************************/
+class ActivityLogIn
+{
+  //Associations
+  1 -- 1 ActivitySignUp;
+  1 -- 1 ActivityAdminMain ifUserAdmin;
+  1 -- 1 ActivityInstructorMain ifUserInstructor;
+  1 -- 1 ActivityMemberMain ifUserMember;
+  1 -- * User;
+  
+  //Variables
+  username;
+  password;
+}
+
+/*******************************************
+** Class:      ActivitySignUp
+**
+** Decription: List of all users.
+*******************************************/
+class ActivitySignUp
+{
+  //Associations
+  1 -- 1 User accountCreation;
+  
+  //Variables
+  username;
+  name;
+  email;
+  password;
+  int role;
+}
+
