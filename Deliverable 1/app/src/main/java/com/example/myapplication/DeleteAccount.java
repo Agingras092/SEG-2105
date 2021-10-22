@@ -25,8 +25,8 @@ public class DeleteAccount extends MainActivity {
 
         if (isDeleted == true) {
             Toast.makeText(DeleteAccount.this, "Data removed", Toast.LENGTH_LONG).show();
-            Intent myIntent = new Intent(getApplicationContext(), ActivityAdminMain.class);
-            startActivity(myIntent);
+//            Intent myIntent = new Intent(getApplicationContext(), ActivityAdminMain.class);
+//            startActivity(myIntent);
 
         } else
             Toast.makeText(DeleteAccount.this, "Data not removed", Toast.LENGTH_LONG).show();

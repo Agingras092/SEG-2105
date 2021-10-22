@@ -32,8 +32,8 @@ public class CreateClass extends MainActivity {
 
             if (isInserted == true) {
                 Toast.makeText(CreateClass.this, "Data inserted", Toast.LENGTH_LONG).show();
-                Intent myIntent = new Intent(getApplicationContext(), ActivityAdminMain.class);
-                startActivity(myIntent);
+//                Intent myIntent = new Intent(getApplicationContext(), ActivityAdminMain.class);
+//                startActivity(myIntent);
 
             } else
                 Toast.makeText(CreateClass.this, "Data not inserted", Toast.LENGTH_LONG).show();
