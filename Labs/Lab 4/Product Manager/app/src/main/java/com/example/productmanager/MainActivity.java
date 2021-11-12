@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Call the viewData() method to display the existing products
         //Different than lab video, was the lab video code wrong?
-        dbHelper.viewData();
+        viewData();
 
         // When a product int he list is clicked, a toast is displayed with the name of the product
         productList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         productPrice.setText("");
 
         listItem.clear();
-        dbHelper.viewData();
+        viewData();
     }
 
     public void lookuproduct(View view) {
@@ -84,6 +84,48 @@ public class MainActivity extends AppCompatActivity {
         else
         {
             productID.setText(" No Match Found");
+        }
+    }
+
+    public void removeProduct(View view) {
+        MyDBHelper dbHelper = new MyDBHelper(this);
+
+        boolean result = dbHelper.deleteProduct((productName.getText().toString()));
+
+        listItem.clear();
+        viewData();
+
+        if( result )
+        {
+            productID.setText(" Record Deleted");
+            productName.setText("");
+            productPrice.setText("");
+        }
+        else
+        {
+            productID.setText(" No Match Found");
+        }
+    }
+
+    private void viewData(){
+        MyDBHelper dbHelper = new MyDBHelper(this);
+
+        Cursor cursor = dbHelper.viewData();
+
+        if(cursor.getCount() == 0 )
+        {
+            Toast.makeText(this, " No data to show", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            while(cursor.moveToNext())
+            {
+                listItem.add(cursor.getString(1));
+            }
+
+            adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listItem);
+
+            productList.setAdapter(adapter);
         }
     }
 }
