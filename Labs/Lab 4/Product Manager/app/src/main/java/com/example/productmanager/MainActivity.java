@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void newProduct(View view) {
-
         MyDBHelper dbHelper = new MyDBHelper(this);
 
         double price = Double.parseDouble(productPrice.getText().toString());
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         dbHelper.viewData();
     }
 
-    public void lookupproduct(View view) {
+    public void lookuproduct(View view) {
         MyDBHelper dbHelper = new MyDBHelper(this);
 
         Product product = dbHelper.findProduct(productName.getText().toString());
@@ -80,6 +79,11 @@ public class MainActivity extends AppCompatActivity {
         if(product != null)
         {
             productID.setText(String.valueOf(product.getProdId()));
+            productPrice.setText(String.valueOf(product.getProdPrice()));
+        }
+        else
+        {
+            productID.setText(" No Match Found");
         }
     }
 }
