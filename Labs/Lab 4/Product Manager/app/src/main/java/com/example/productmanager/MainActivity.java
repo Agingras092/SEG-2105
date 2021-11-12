@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.os.Bundle;
 import android.widget.Toast;
+import com.example.productmanager.MyDBHelper;
 
 import java.util.ArrayList;
 
@@ -40,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
         listItem = new ArrayList<>();
 
         // Call the viewData() method to display the existing products
-        viewData();
+        //Different than lab video, was the lab video code wrong?
+        dbHelper.viewData();
 
         // When a product int he list is clicked, a toast is displayed with the name of the product
         productList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -53,9 +55,31 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void newProduct (View view) {
+    public void newProduct(View view) {
+
         MyDBHelper dbHelper = new MyDBHelper(this);
 
-        // Get price from the text box
+        double price = Double.parseDouble(productPrice.getText().toString());
+
+        Product product = new Product(productName.getText().toString(), price);
+
+        dbHelper.addProduct(product);
+
+        productName.setText("");
+        productPrice.setText("");
+
+        listItem.clear();
+        dbHelper.viewData();
+    }
+
+    public void lookupproduct(View view) {
+        MyDBHelper dbHelper = new MyDBHelper(this);
+
+        Product product = dbHelper.findProduct(productName.getText().toString());
+
+        if(product != null)
+        {
+            productID.setText(String.valueOf(product.getProdId()));
+        }
     }
 }

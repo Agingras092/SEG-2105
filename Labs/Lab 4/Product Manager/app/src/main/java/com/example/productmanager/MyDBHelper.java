@@ -13,16 +13,15 @@ import com.example.productmanager.Product;
 
 public class MyDBHelper extends SQLiteOpenHelper {
     private static final int DATBASE_VERSION = 1;
-    private static final String DATABSE_NAME = "productDB.db";
+    private static final String DATABASE_NAME = "productDB.db";
     private static final String TABLE_PRODUCTS = "products";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMNS_PRODUCTNAME = "productname";
     private static final String COLUMN_PRICE = "price";
 
-    public MyDBHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public MyDBHelper(@Nullable Context context) {
+        super(context, DATABASE_NAME, null, DATBASE_VERSION);
     }
-
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
