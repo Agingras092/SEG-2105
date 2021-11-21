@@ -60,6 +60,17 @@ public class MainActivity extends AppCompatActivity {
                     MainActivity.this.startActivity(myIntent);
                 }
 
+                if(res.getString(5).equals("1") )
+                {
+                    //INSTRUCTOR CASE
+                    Intent myIntent = new Intent(MainActivity.this, InstructorMainActivity.class);
+                    //Validate login
+                    myIntent.putExtra("username", res.getString(1)); //Optional parameters
+                    myIntent.putExtra("name", res.getString(2)); //Optional parameters
+
+                    MainActivity.this.startActivity(myIntent);
+                }
+
                 return;
             }
         }

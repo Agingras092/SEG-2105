@@ -25,6 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME2 = "Class.db";
 
     public static final String CLASSID = "ID";
+    public static final String CLASSINST = "CLASSINST";
     public static final String CLASSNAME = "CLASSNAME";
     public static final String CLASSDESC = "CLASSDESC";
 
@@ -36,7 +37,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, USERNAME TEXT, NAME TEXT, EMAIL TEXT, PASSWORD TEXT, RANK INTEGER)");
-        sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME2 + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, CLASSNAME TEXT, CLASSDESC TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME2 + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, CLASSINST TEXT, CLASSNAME TEXT, CLASSDESC TEXT)");
     }
 
     @Override
@@ -62,10 +63,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean insertClass(String classname, String classdesc) {
+    public boolean insertClass(String classinst, String classname, String classdesc) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
+        contentValues.put(CLASSINST, classinst);
         contentValues.put(CLASSNAME, classname);
         contentValues.put(CLASSDESC, classdesc);
 

@@ -12,12 +12,14 @@ import android.widget.Toast;
 public class CreateClass extends MainActivity {
     EditText classname;
     EditText classdesc;
+    String classinst;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_class);
 
+        classinst    = getIntent().getStringExtra("name");
         classname    = (EditText)findViewById(R.id.editClassName);
         classdesc    = (EditText)findViewById(R.id.editClassDesc);
     }
@@ -27,7 +29,8 @@ public class CreateClass extends MainActivity {
         Cursor res = myDB.verifyClassName(classname.getText().toString());
 
         if (res.getCount() == 0) {
-            boolean isInserted = myDB.insertClass(classname.getText().toString(),
+            boolean isInserted = myDB.insertClass(classinst,
+                                                  classname.getText().toString(),
                                                   classdesc.getText().toString());
 
             if (isInserted == true) {
