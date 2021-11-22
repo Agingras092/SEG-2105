@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".CreateFitness"
+            android:exported="true" />
+        <activity
+            android:name=".EditClass"
+            android:exported="true" />
+        <activity
             android:name=".SearchClass"
             android:exported="true" />
         <activity

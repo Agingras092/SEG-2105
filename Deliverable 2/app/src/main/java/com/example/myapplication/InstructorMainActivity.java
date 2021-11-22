@@ -17,13 +17,13 @@ public class InstructorMainActivity extends MainActivity {
     /*
         1. See all scheduled fitness classes
             a. List of all classes taught by instructor (DONE)
-            b. Search for class by classname
+            b. Search for class by classname or instructorname (DONE)
         2. Schedule a class for this instructor
-            a. Chooses type of fitness they teach (from admin created options)
-            b. Select difficulty level
-            c. Day of the week
-            d. Time the class will be at
-            e. Maximum capacity for class
+            a. Chooses type of fitness they teach (from admin created options) (DONE)
+            b. Select difficulty level (DONE)
+            c. Day of the week (DONE)
+            d. Time the class will be at (DONE)
+            e. Maximum capacity for class (
         3. editing instructors classes
             a. Cancel a class
         4. Cant schedule a boxing class on a day where another instructor already has a boxing class.
@@ -36,13 +36,13 @@ public class InstructorMainActivity extends MainActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_main);
+        setContentView(R.layout.activity_instructor_main);
 
         username = getIntent().getStringExtra("username");
         name = getIntent().getStringExtra("name");
 
         //Welcome message
-        showMessage("Welcome!!!", "Welcome " + name + " / " + username + "!!! You are signed in as Admin.");
+        showMessage("Welcome!!!", "Welcome " + name + " / " + username + ". You are signed in as Instructor.");
     }
 
     public void createClassActivity(View view) {
@@ -57,19 +57,16 @@ public class InstructorMainActivity extends MainActivity {
     }
 
     public void viewAllClasses(View view) {
-        Cursor res = myDB.getAllClasses();
+        Cursor res = myDB.getAllClassesByInst(name);
         if(res.getCount() == 0) {
-            return;
+            showMessage("Data", "No classes to display");
         }
         StringBuffer buffer = new StringBuffer();
         while(res.moveToNext()) {
-            if( res.getString(1) == name )
-            {
-                buffer.append("\nId : " + res.getString(0)+"\n");
-                buffer.append("Class Instructor : " + res.getString(1)+"\n");
-                buffer.append("Class Name : " + res.getString(2)+"\n");
-                buffer.append("Class Desc : " + res.getString(3)+"\n");
-            }
+            buffer.append("\nId : " + res.getString(0)+"\n");
+            buffer.append("Class Instructor : " + res.getString(1)+"\n");
+            buffer.append("Class Name : " + res.getString(2)+"\n");
+            buffer.append("Class Desc : " + res.getString(3)+"\n");
         }
         showMessage("Data", buffer.toString());
     }

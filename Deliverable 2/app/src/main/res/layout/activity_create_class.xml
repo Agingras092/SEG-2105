@@ -6,32 +6,67 @@
     android:layout_height="match_parent"
     tools:context=".CreateClass">
 
+    <Spinner
+        android:id="@+id/difficultySpinner"
+        android:layout_width="341dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.228"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fitnessSpinner" />
+
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Class"
         android:onClick="addClass"
+        android:text="Add Class"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.587" />
+        app:layout_constraintVertical_bias="0.953" />
 
     <EditText
         android:id="@+id/editClassName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="393dp"
+        android:layout_height="45dp"
         android:ems="10"
         android:hint="Class Name"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.323" />
+        app:layout_constraintVertical_bias="0.026" />
+
+    <EditText
+        android:id="@+id/editClassName3"
+        android:layout_width="393dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:hint="Time of day"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/difficultySpinner"
+        app:layout_constraintVertical_bias="0.037" />
+
+    <EditText
+        android:id="@+id/editClassName4"
+        android:layout_width="393dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:hint="Day of week"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editClassName3"
+        app:layout_constraintVertical_bias="0.046" />
 
     <EditText
         android:id="@+id/editClassDesc"
@@ -43,7 +78,28 @@
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editClassName"
+        app:layout_constraintVertical_bias="0.888" />
+
+    <Spinner
+        android:id="@+id/fitnessSpinner"
+        android:layout_width="341dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.228"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editClassName" />
+
+    <EditText
+        android:id="@+id/editTextNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="Max capacity"
+        android:inputType="number"
+        app:layout_constraintTop_toBottomOf="@+id/editClassName4"
+        tools:layout_editor_absoluteX="100dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

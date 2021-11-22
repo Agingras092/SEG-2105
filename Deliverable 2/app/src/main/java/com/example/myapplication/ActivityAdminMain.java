@@ -17,7 +17,7 @@ public class ActivityAdminMain extends MainActivity {
         String username = getIntent().getStringExtra("username");
         String name = getIntent().getStringExtra("name");
 
-        showMessage("Welcome!!!", "Welcome " + name + " / " + username + "!!! You are signed in as Admin.");
+        showMessage("Welcome!!!", "Welcome " + name + " / " + username + ". You are signed in as Admin.");
     }
 
     public void deleteAccount(View view)
@@ -43,6 +43,7 @@ public class ActivityAdminMain extends MainActivity {
         showMessage("Data", buffer.toString());
     }
 
+    //Deprecated
     public void viewAllClasses(View view) {
         Cursor res = myDB.getAllClasses();
         if(res.getCount() == 0) {
@@ -57,8 +58,8 @@ public class ActivityAdminMain extends MainActivity {
         showMessage("Data", buffer.toString());
     }
 
-    public void createClassActivity(View view) {
-        Intent myIntent = new Intent(ActivityAdminMain.this, CreateClass.class);
+    public void createFitnessActivity(View view) {
+        Intent myIntent = new Intent(ActivityAdminMain.this, CreateFitness.class);
         ActivityAdminMain.this.startActivity(myIntent);
     }
 

@@ -27,7 +27,8 @@ public class MainActivity extends AppCompatActivity {
         username    = (EditText)findViewById(R.id.editUsername);
         password    = (EditText)findViewById(R.id.editPassword);
 
-        myDB = new DatabaseHelper(this); //THIS IS CALLED MORE OFTEN THAN IT SHOULD BE EBCAUSE OF THE WAY WE EXIT OUT OF THE CREATE ACCOUNT
+        myDB = new DatabaseHelper(this);
+        //THIS IS CALLED MORE OFTEN THAN IT SHOULD BE BECAUSE OF THE WAY WE EXIT OUT OF THE CREATE ACCOUNT
         //AND CREATE CLASS AND DELETE CLASS AND DELETE ACCOUNT PAGES. WE KNOW WHY IT HAPPENS
     }
 
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent myIntent = new Intent(MainActivity.this, ActivityAdminMain.class);
                     //Validate login
                     myIntent.putExtra("username", res.getString(1)); //Optional parameters
-                    myIntent.putExtra("name", res.getString(2)); //Optional parameters
+                    myIntent.putExtra("name", res.getString(3)); //Optional parameters
 
                     MainActivity.this.startActivity(myIntent);
                 }
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent myIntent = new Intent(MainActivity.this, InstructorMainActivity.class);
                     //Validate login
                     myIntent.putExtra("username", res.getString(1)); //Optional parameters
-                    myIntent.putExtra("name", res.getString(2)); //Optional parameters
+                    myIntent.putExtra("name", res.getString(3)); //Optional parameters
 
                     MainActivity.this.startActivity(myIntent);
                 }
