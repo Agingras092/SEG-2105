@@ -23,10 +23,10 @@ public class InstructorMainActivity extends MainActivity {
             b. Select difficulty level (DONE)
             c. Day of the week (DONE)
             d. Time the class will be at (DONE)
-            e. Maximum capacity for class (
+            e. Maximum capacity for class (DONE)
         3. editing instructors classes
             a. Cancel a class
-        4. Cant schedule a boxing class on a day where another instructor already has a boxing class.
+        4. Cant schedule a boxing class on a day where another instructor already has a boxing class.(DONE)
            this applies for every class type... Should generate an error msg.
      */
 
@@ -63,12 +63,23 @@ public class InstructorMainActivity extends MainActivity {
         }
         StringBuffer buffer = new StringBuffer();
         while(res.moveToNext()) {
-            buffer.append("\nId : " + res.getString(0)+"\n");
             buffer.append("Class Instructor : " + res.getString(1)+"\n");
             buffer.append("Class Name : " + res.getString(2)+"\n");
-            buffer.append("Class Desc : " + res.getString(3)+"\n");
+            buffer.append("Time : " + res.getString(5) + " at " + res.getString(6)+"\n");
+            buffer.append("Type : " + res.getString(4)+"\n");
+            buffer.append("________________________________________\n");
         }
         showMessage("Data", buffer.toString());
+    }
+
+    public void deleteClassActivity(View view) {
+        Intent myIntent2 = new Intent(InstructorMainActivity.this, DeleteClass.class);
+        InstructorMainActivity.this.startActivity(myIntent2);
+    }
+
+    public void editClassActivity(View view) {
+        Intent myIntent = new Intent(InstructorMainActivity.this, EditClass.class);
+        InstructorMainActivity.this.startActivity(myIntent);
     }
 
 }

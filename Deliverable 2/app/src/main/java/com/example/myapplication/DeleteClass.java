@@ -31,8 +31,7 @@ public class DeleteClass extends MainActivity {
 
             if (isDeleted == true) {
                 Toast.makeText(DeleteClass.this, "Data removed", Toast.LENGTH_LONG).show();
-//                Intent myIntent = new Intent(getApplicationContext(), ActivityAdminMain.class);
-//                startActivity(myIntent);
+                finish();
 
             } else
                 Toast.makeText(DeleteClass.this, "Data not removed", Toast.LENGTH_LONG).show();

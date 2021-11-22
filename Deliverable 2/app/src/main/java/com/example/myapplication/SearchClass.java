@@ -29,11 +29,11 @@ public class SearchClass extends MainActivity {
         Cursor res;
         StringBuffer buffer = new StringBuffer();
 
-        if( className.getText().toString() != "" )
+        if( !className.getText().toString().equals("") )
         {
             res = myDB.getAllClassesByClass(className.getText().toString());
         }
-        else if( instName.getText().toString() != "" )
+        else if( !instName.getText().toString().equals("") )
         {
             res = myDB.getAllClassesByInst(instName.getText().toString());
         }

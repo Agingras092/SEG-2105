@@ -28,10 +28,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String CLASSINST = "CLASSINST";
     public static final String CLASSNAME = "CLASSNAME";
     public static final String CLASSDESC = "CLASSDESC";
-    public static final String CLASSFITNESS = "CLASSSFITNESS";
+    public static final String CLASSFITNESS = "CLASSFITNESS";
     public static final String CLASSDAY = "CLASSDAY";
     public static final String CLASSTIME = "CLASSTIME";
     public static final String CLASSDIFF = "CLASSDIFF";
+    public static final String CLASSCAP  = "CLASSCAP";
 
     public static final String TABLE_NAME3 = "fitness_table";
     public static final String DATABASE_NAME3 = "Fitness.db";
@@ -48,7 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void onReset(SQLiteDatabase sqLiteDatabase) {
         //sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, USERNAME TEXT, NAME TEXT, EMAIL TEXT, PASSWORD TEXT, RANK INTEGER)");
-        sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME2 + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, CLASSINST TEXT, CLASSNAME TEXT, CLASSDESC TEXT, CLASSFITNESS TEXT, CLASSDAY TEXT, CLASSTIME TEXT, CLASSDIFF TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME2 + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, CLASSINST TEXT, CLASSNAME TEXT, CLASSDESC TEXT, CLASSFITNESS TEXT, CLASSDAY TEXT, CLASSTIME TEXT, CLASSDIFF TEXT, CLASSCAP TEXT)");
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME3 + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, FITNESSNAME TEXT, FITNESSDESC TEXT)");
         //sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME2);
@@ -89,7 +90,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
-    public boolean insertClass(String classinst, String classname, String classdesc, String classday, String classtime, String classdiff, String classfitness) {
+    public boolean insertClass(String classinst, String classname, String classdesc, String classday, String classtime, String classdiff, String classfitness, String classcap) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -100,6 +101,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(CLASSTIME, classtime);
         contentValues.put(CLASSDIFF, classdiff);
         contentValues.put(CLASSFITNESS, classfitness);
+        contentValues.put(CLASSCAP, classcap);
 
         long result = sqLiteDatabase.insert(TABLE_NAME2, null, contentValues);
 
@@ -195,6 +197,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor verifyClassName(String classname) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         String query = "select * from "+TABLE_NAME2+" where classname = '" + classname + "'";
+        Cursor res = sqLiteDatabase.rawQuery(query, null);
+        return res;
+    }
+
+    public Cursor verifyDay(String classday) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        String query = "select * from "+TABLE_NAME2+" where classday = '" + classday + "'";
         Cursor res = sqLiteDatabase.rawQuery(query, null);
         return res;
     }

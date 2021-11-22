@@ -1,7 +1,5 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -18,8 +16,8 @@ public class CreateFitness extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_fitness);
 
-        fitnessname    = (EditText)findViewById(R.id.editClassName);
-        fitnessdesc    = (EditText)findViewById(R.id.editClassDesc);
+        fitnessname    = (EditText)findViewById(R.id.editClassNameEdit);
+        fitnessdesc    = (EditText)findViewById(R.id.editClassDesc2);
     }
 
     public void addFitness(View view) {
