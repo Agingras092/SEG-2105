@@ -1,17 +1,19 @@
 package com.example.simplecalculator;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-/***************************************************************************
- * Calculator Main
- * Description: Basic calculator app that supports addition, subtraction,
- *              multiplication, division, and percentages. Features a button
- *              to swap between positive and negative values.
- ***************************************************************************/
-
+/**
+ * This is a basic calculator app that supports addition, subtraction,
+ * multiplication, division, and percentages. It features a button to
+ * swap between positive and negative values.
+ *
+ * @author Emirali Gungor, Owen Stafford, Alexzander Gingras,
+ * @version 2.0.0 (11/Nov/2021)
+ */
 public class MainActivity extends AppCompatActivity {
 
     // Initialize variables.
@@ -20,7 +22,10 @@ public class MainActivity extends AppCompatActivity {
     boolean isNewOp = true;
     EditText textBox;
 
-
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,11 +34,13 @@ public class MainActivity extends AppCompatActivity {
         textBox = findViewById(R.id.editText);
     }
 
-    /***********************************************
-     * Number Event
-     * Description: Takes new value input and adds
-     *              it to the previous number.
-     ***********************************************/
+    /**
+     * Takes new value input from the user and adds it
+     * to the right of the current string of integers.
+     * Afterwards, it is displayed.
+     *
+     * @param view
+     */
     public void numberEvent(View view) {
 
         // If operator was placed before it, empty ed1 and set isNewOp to false.
@@ -103,11 +110,14 @@ public class MainActivity extends AppCompatActivity {
         textBox.setText(number);
     }
 
-    /***************************************************
-     * Operator Event
-     * Description: Saves the operator type and empties
-     *              the text box for a second value
-     ***************************************************/
+
+    /**
+     * Stores the current value and chosen operator type
+     * before emptying the text box and allowing the
+     * user to input a second value.
+     *
+     * @param view
+     */
     public void operatorEvent(View view) {
         isNewOp = true; // Reset operator condition to accept second value.
         prevNumber = textBox.getText().toString(); // Store previous value.
@@ -122,10 +132,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /*******************************************
-     * Equals Event
-     * Description:
-     *******************************************/
+
+    /**
+     * Saves the second value and performs the chosen operation.
+     * Upon completion, the final result is displayed in
+     * the text box.
+     *
+     * @param view
+     */
     public void equalEvent(View view) {
         String newNumber = textBox.getText().toString();
         double result = 0.0;
@@ -160,22 +174,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /*************************************************
-     * All Clear Event
-     * Description: Erases current and old value
-     *              and sets operator to new.
-     *************************************************/
+
+    /**
+     * Erases the current and preview values and
+     * resets isNewOp to true.
+     *
+     * @param view
+     */
     public void acEvent(View view) {
         textBox.setText("0");
         prevNumber = "0";
         isNewOp = true;
     }
 
-    /**********************************************
-     * Percent Event
-     * Description: Converts the current number to
-     *              a percentage.
-     **********************************************/
+
+    /**
+     * Converts the current number to it's percentage.
+     *
+     * @param view
+     */
     public void percentEvent(View view) {
         double no = Double.parseDouble(textBox.getText().toString()) / 100;
         textBox.setText(no+"");
