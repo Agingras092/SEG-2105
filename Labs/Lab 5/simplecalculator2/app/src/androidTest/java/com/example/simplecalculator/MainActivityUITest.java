@@ -1,6 +1,17 @@
 package com.example.simplecalculator;
 
+import static androidx.test.espresso.Espresso.*;
+import static androidx.test.espresso.action.ViewActions.*;
+import static androidx.test.espresso.assertion.ViewAssertions.*;
+import static androidx.test.espresso.matcher.ViewMatchers.*;
+
+import android.view.View;
+
+import org.hamcrest.Matcher;
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -13,7 +24,19 @@ public class MainActivityUITest {
      */
     @Test
     public void testPositiveToNegativeNumber() {
+        //Clear previous content
+        onView(withId(R.id.buAC)).perform(click());
 
+        //Add an integer and make it negative. Check
+        onView(withId(R.id.bu1)).perform(click());
+        onView(withId(R.id.buPlusMinus)).perform(click());
+        onView(withId(R.id.editText)).check(matches(withText("-1")));
+
+        //Add decimal numbers and make positive. Check
+        onView(withId(R.id.buDot)).perform(click());
+        onView(withId(R.id.bu3)).perform(click());
+        onView(withId(R.id.buPlusMinus)).perform(click());
+        onView(withId(R.id.editText)).check(matches(withText("1.3")));
     }
 
     /**
@@ -23,7 +46,12 @@ public class MainActivityUITest {
      */
     @Test
     public void testEqualOnClearedScreen() {
+        //Clear previous content.
+        onView(withId(R.id.buAC)).perform(click());
 
+        //Check if text is still 0.
+        onView(withId(R.id.buEqual)).perform(click());
+        onView(withId(R.id.editText)).check(matches(withText("0")));
     }
 
     /**
@@ -32,14 +60,38 @@ public class MainActivityUITest {
      */
     @Test
     public void testTwoDecimalsMakeInteger() {
+        //Clear previous content
+        onView(withId(R.id.buAC)).perform(click());
 
+        //Input two decimal values with an addition
+        onView(withId(R.id.bu1)).perform(click());
+        onView(withId(R.id.buDot)).perform(click());
+        onView(withId(R.id.bu3)).perform(click());
+        onView(withId(R.id.buPlus)).perform(click());
+        onView(withId(R.id.bu2)).perform(click());
+        onView(withId(R.id.buDot)).perform(click());
+        onView(withId(R.id.bu7)).perform(click());
+        onView(withId(R.id.buEqual)).perform(click());
+
+        //Check output
+        onView(withId(R.id.editText)).check(matches(withText("4")));
     }
+
 
     /**
      * Ensure that the percentage function is operational.
      */
     @Test
     public void testPercentageFunction() {
+        //Clear previous content
+        onView(withId(R.id.buAC)).perform(click());
 
+        //Add an integer and check percentage
+        onView(withId(R.id.bu5)).perform(click());
+        onView(withId(R.id.bu2)).perform(click());
+        onView(withId(R.id.buPercent)).perform(click());
+
+        //Check output
+        onView(withId(R.id.editText)).check(matches(withText("0.35")));
     }
 }

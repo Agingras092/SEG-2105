@@ -12,6 +12,7 @@ import android.widget.EditText;
  * swap between positive and negative values.
  *
  * @author Emirali Gungor, Owen Stafford, Alexzander Gingras,
+ *         Oboro Onoruvwe, Tamer Verir
  * @version 2.0.0 (11/Nov/2021)
  */
 public class MainActivity extends AppCompatActivity {
@@ -23,8 +24,9 @@ public class MainActivity extends AppCompatActivity {
     EditText textBox;
 
     /**
+     * Initializes the activity.
      *
-     * @param savedInstanceState
+     * @param savedInstanceState Re-initialize recent data if previously closed
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
      * to the right of the current string of integers.
      * Afterwards, it is displayed.
      *
-     * @param view
+     * @param view Button input from the user.
      */
     public void numberEvent(View view) {
 
@@ -116,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
      * before emptying the text box and allowing the
      * user to input a second value.
      *
-     * @param view
+     * @param view Button input from the user.
      */
     public void operatorEvent(View view) {
         isNewOp = true; // Reset operator condition to accept second value.
@@ -138,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
      * Upon completion, the final result is displayed in
      * the text box.
      *
-     * @param view
+     * @param view Button input from the user.
      */
     public void equalEvent(View view) {
         String newNumber = textBox.getText().toString();
@@ -179,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
      * Erases the current and preview values and
      * resets isNewOp to true.
      *
-     * @param view
+     * @param view Button input from the user.
      */
     public void acEvent(View view) {
         textBox.setText("0");
@@ -191,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Converts the current number to it's percentage.
      *
-     * @param view
+     * @param view Button input from the user.
      */
     public void percentEvent(View view) {
         double no = Double.parseDouble(textBox.getText().toString()) / 100;
