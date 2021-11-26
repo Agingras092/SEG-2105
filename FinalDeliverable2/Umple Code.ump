@@ -1,0 +1,186 @@
+/*******************************************
+** Class:       User
+**
+** Description: Parent class for all
+**              user types.
+*******************************************/
+class User
+{
+  //Variables
+  username;
+  name; 
+  email;
+  password;
+  int role;
+  
+  //Associations
+  
+  //Methods
+}
+
+/*******************************************
+** Class:       Admin (0)
+**
+** Description: Manage all classes and
+**              other member accounts.
+**
+** Permissions: -Can create/delete classes
+**              -Can edit classes 
+**              -Can delete user accounts
+*******************************************/
+class Admin
+{
+  //Variables
+  
+  //Associations
+  isA User;
+  1 -- * ClassType adminOptions;
+  1 -- * User adminManages;  
+  
+  //Methods
+  void addClassType(String name, String desc){}
+  void editClassType(String oldName, String newTitle,String newDesc){}
+  void deleteClassType(String name){}
+  void deleteInstructor(String name){}
+  void deleteMember(String name){}
+}
+
+/*******************************************
+** Class:       Instructor (1)
+**
+** Decription:  Books classes they'd like to
+**              teach.
+**
+** Permissions: -Can book classes
+**              -Select date, time,
+**               difficulty, and capacity
+*******************************************/
+class Instructor
+{
+  //Variables
+  List classesBooked;
+  
+  //Associations
+  isA User;
+  1 <@>- * Class instructorOptions;
+  
+  //Methods
+    //classID would be its position in the list
+  void teachClass(ClassType type, String difficulty, Date date, Time startTime, Time endTime, int maxCap){}
+  void editClass(int ClassID, ClassType type, String difficulty, Date date, Time startTime, Time endTime, int maxCap){}
+  void cancelClass(int classID){}
+}
+
+/*******************************************
+** Class:       Member (2)
+**
+** Decription:  Browse classes to join and
+**              can drop out whenever. 
+**
+** Permissions: -Search classes by name
+**               or day of week
+**              -Join class if not full 
+**              -Drop from enrolled classes
+*******************************************/
+class Member
+{
+  //Variables
+
+  //Associations
+  isA User;
+  
+  //Methods
+
+}
+
+/*******************************************
+** Class:      ClassType
+**
+** Decription: Is used by admin to create
+**             different types of classes.
+*******************************************/
+class ClassType
+{
+  //Variables
+  name;
+  description;
+  
+  //Associations
+  
+  //Methods
+  void edit(String name, String description){}
+  void delete(){}
+  
+}
+
+/*******************************************
+** Class:      Class
+**
+** Decription: Is used by instructor to 
+**             create and manage classes.
+*******************************************/
+class Class
+{
+  //Variables
+  ClassType type;
+  difficulty;
+  instructorName;
+  Date date;
+  Time startTime;
+  Time endTime;
+  int maxCap;
+  
+  //Associations
+  * -<@> 1 ClassType;
+  
+  //Methods
+  void edit(ClassType type, String difficulty, Date date, Time startTime, Time endTime, int maxCap){}
+  void delete(){}
+}
+
+
+
+namespace -;
+
+
+class User
+{
+  position 55 178 141.35 128.817;
+}
+
+class ClassType
+{
+  position 290 29 148.233 76.3667;
+}
+
+class Class
+{
+  position 517 10 178.267 163.783;
+  position.association Class__ClassType 0,56 149,37;
+}
+
+class Member
+{
+  position 804 234 109 41.4;
+  position.association Class__Member 79,0 179,80;
+  position.association Class:memberManage__Member 0,10 178,69;
+  position.association Class:memberOption__Member 0,10 179,150;
+  position.association Class:memberOptio__Member 0,10 179,150;
+  position.association Class:memberOptions__Member 0,10 179,151;
+}
+
+class Instructor
+{
+  position 532 230 128.45 58.8833;
+  position.association Class__Instructor 64,0 79,164;
+  position.association Class:instructor__Instructor 74,0 90,164;
+  position.association Class:instructorOptions__Instructor 72,0 87,164;
+}
+
+class Admin
+{
+  position 312 232 109 41.4;
+  position.association Admin__ClassType:adminCreates 48,0 70,76;
+  position.association Admin__User:adminManages 0,5 142,59;
+  position.association Admin__ClassType:adminOptions 48,0 70,76;
+}//$?[End_of_model]$?

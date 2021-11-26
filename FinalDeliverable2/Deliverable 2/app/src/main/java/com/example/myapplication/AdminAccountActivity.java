@@ -36,6 +36,11 @@ public class AdminAccountActivity extends MainActivity {
         AddData();
     }
 
+    public static boolean isValidName(String name)
+    {
+        return name.matches("[a-zA-Z]+");
+    }
+
     public void AddData() {
         btnAddAccount.setOnClickListener(
                 new View.OnClickListener() {

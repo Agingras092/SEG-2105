@@ -196,7 +196,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor verifyClassName(String classname) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        String query = "select * from "+TABLE_NAME2+" where classname = '" + classname + "'";
+        String query = "select * from " + TABLE_NAME2 + " where classname = '" + classname + "'";
         Cursor res = sqLiteDatabase.rawQuery(query, null);
         return res;
     }

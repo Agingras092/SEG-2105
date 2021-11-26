@@ -5,18 +5,26 @@ import static androidx.test.espresso.action.ViewActions.*;
 import static androidx.test.espresso.assertion.ViewAssertions.*;
 import static androidx.test.espresso.matcher.ViewMatchers.*;
 
-import android.view.View;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
 
-import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-
+@RunWith(AndroidJUnit4.class)
+@LargeTest
 public class MainActivityUITest {
+
+    /*
+    getActivity();
+    startActivitySync();
+    */
+
+    @Rule
+    public ActivityScenarioRule<MainActivity> activityRule = new ActivityScenarioRule<>(MainActivity.class);
 
     /**
      * Ensures that the positive/negative button
@@ -24,6 +32,7 @@ public class MainActivityUITest {
      */
     @Test
     public void testPositiveToNegativeNumber() {
+
         //Clear previous content
         onView(withId(R.id.buAC)).perform(click());
 
@@ -92,6 +101,6 @@ public class MainActivityUITest {
         onView(withId(R.id.buPercent)).perform(click());
 
         //Check output
-        onView(withId(R.id.editText)).check(matches(withText("0.35")));
+        onView(withId(R.id.editText)).check(matches(withText("0.52")));
     }
 }
