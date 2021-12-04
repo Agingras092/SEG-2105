@@ -13,23 +13,6 @@ import android.os.Bundle;
 import android.view.View;
 
 public class InstructorMainActivity extends MainActivity {
-
-    /*
-        1. See all scheduled fitness classes
-            a. List of all classes taught by instructor (DONE)
-            b. Search for class by classname or instructorname (DONE)
-        2. Schedule a class for this instructor
-            a. Chooses type of fitness they teach (from admin created options) (DONE)
-            b. Select difficulty level (DONE)
-            c. Day of the week (DONE)
-            d. Time the class will be at (DONE)
-            e. Maximum capacity for class (DONE)
-        3. editing instructors classes
-            a. Cancel a class
-        4. Cant schedule a boxing class on a day where another instructor already has a boxing class.(DONE)
-           this applies for every class type... Should generate an error msg.
-     */
-
     String name;
     String username;
 
@@ -57,7 +40,7 @@ public class InstructorMainActivity extends MainActivity {
     }
 
     public void viewAllClasses(View view) {
-        Cursor res = myDB.getAllClassesByInst(name);
+        Cursor res = myDB.getAllClasses();
         if(res.getCount() == 0) {
             showMessage("Data", "No classes to display");
         }
@@ -74,6 +57,7 @@ public class InstructorMainActivity extends MainActivity {
 
     public void deleteClassActivity(View view) {
         Intent myIntent2 = new Intent(InstructorMainActivity.this, DeleteClass.class);
+        myIntent2.putExtra("name", name); //Optional parameters
         InstructorMainActivity.this.startActivity(myIntent2);
     }
 

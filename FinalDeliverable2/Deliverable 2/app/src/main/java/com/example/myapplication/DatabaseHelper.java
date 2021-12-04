@@ -41,6 +41,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String FITNESSNAME = "FITNESSNAME";
     public static final String FITNESSDESC = "FITNESSDESC";
 
+    public static final String TABLE_NAME4 = "student_table";
+    public static final String DATABASE_NAME4 = "Student.db";
+
+
+
+    public static final String TABLE_NAME5 = "enrollment_table";
+    public static final String DATABASE_NAME5 = "Enrollment.db";
+
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
         SQLiteDatabase db = this.getWritableDatabase();

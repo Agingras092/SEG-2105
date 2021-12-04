@@ -20,11 +20,11 @@
         android:id="@+id/daySpinner2"
         android:layout_width="341dp"
         android:layout_height="31dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.228"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editClassName3" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
 
     <Button
         android:id="@+id/button"
@@ -51,19 +51,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.026" />
-
-    <EditText
-        android:id="@+id/editClassName3"
-        android:layout_width="393dp"
-        android:layout_height="45dp"
-        android:ems="10"
-        android:hint="Time of day"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/difficultySpinner2"
-        app:layout_constraintVertical_bias="0.037" />
 
     <EditText
         android:id="@+id/editClassDesc2"
@@ -99,4 +86,16 @@
         android:inputType="number"
         app:layout_constraintTop_toBottomOf="@+id/daySpinner2"
         tools:layout_editor_absoluteX="100dp" />
+
+    <EditText
+        android:id="@+id/editTextTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/difficultySpinner2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

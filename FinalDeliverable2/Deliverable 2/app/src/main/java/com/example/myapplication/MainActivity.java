@@ -72,6 +72,17 @@ public class MainActivity extends AppCompatActivity {
                     MainActivity.this.startActivity(myIntent);
                 }
 
+                if(res.getString(5).equals("2") )
+                {
+                    //GYM STUDENT CASE
+                    Intent myIntent = new Intent(MainActivity.this, InstructorMainActivity.class);
+                    //Validate login
+                    myIntent.putExtra("username", res.getString(1)); //Optional parameters
+                    myIntent.putExtra("name", res.getString(3)); //Optional parameters
+
+                    MainActivity.this.startActivity(myIntent);
+                }
+
                 return;
             }
         }
