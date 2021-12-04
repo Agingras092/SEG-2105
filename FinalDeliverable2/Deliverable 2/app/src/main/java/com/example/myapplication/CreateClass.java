@@ -26,7 +26,7 @@ public class CreateClass extends MainActivity {
         classdesc    = (EditText)findViewById(R.id.editClassDesc2);
         spinner      = (Spinner)findViewById(R.id.fitnessSpinner2);
         difficulty   = (Spinner)findViewById(R.id.difficultySpinner2);
-        tod          = (EditText)findViewById(R.id.editClassName3);
+        tod          = (EditText)findViewById(R.id.editTextTime);
         dow          = (Spinner)findViewById(R.id.daySpinner2);
         capacity     = (EditText)findViewById(R.id.editTextNumber);
         List<String> spinnerList = new ArrayList<String>();

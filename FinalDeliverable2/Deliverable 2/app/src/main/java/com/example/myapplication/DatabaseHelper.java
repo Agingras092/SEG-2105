@@ -41,18 +41,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String FITNESSNAME = "FITNESSNAME";
     public static final String FITNESSDESC = "FITNESSDESC";
 
-    public static final String TABLE_NAME4 = "student_table";
-    public static final String DATABASE_NAME4 = "Student.db";
+    public static final String TABLE_NAME4 = "enrollment_table";
+    public static final String DATABASE_NAME4 = "Enrollment.db";
 
+    public static final String ENROLLMENTID = "ID";
+    public static final String STUDENTID = "STUDENTID";
+    public static final String ENROLLEDCLASSID = "ENROLLEDCLASSID";
 
-
-    public static final String TABLE_NAME5 = "enrollment_table";
-    public static final String DATABASE_NAME5 = "Enrollment.db";
+    /*
+        classinst = 1;
+        classname = 2;
+        classdesc = 3;
+        classtype = 4;
+        classdate = 5;
+        classtiem = 6;
+        classdiff = 7;
+        classcap  = 8;
+    */
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
         SQLiteDatabase db = this.getWritableDatabase();
-        //onReset(db); //Reset all databases
+//
+//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME2);
+//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME3);
+//        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME4);
+//
+//        db.execSQL("CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, USERNAME TEXT, NAME TEXT, EMAIL TEXT, PASSWORD TEXT, RANK INTEGER)");
+//        db.execSQL("CREATE TABLE " + TABLE_NAME2 + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, CLASSINST TEXT, CLASSNAME TEXT, CLASSDESC TEXT, CLASSFITNESS TEXT, CLASSDAY TEXT, CLASSTIME TEXT, CLASSDIFF TEXT, CLASSCAP TEXT)");
+//        db.execSQL("CREATE TABLE " + TABLE_NAME3 + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, FITNESSNAME TEXT, FITNESSDESC TEXT)");
+//        db.execSQL("CREATE TABLE " + TABLE_NAME4 + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, STUDENTID TEXT, ENROLLEDCLASSID TEXT)");
+
     }
 
     public void onReset(SQLiteDatabase sqLiteDatabase) {
@@ -67,7 +87,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, USERNAME TEXT, NAME TEXT, EMAIL TEXT, PASSWORD TEXT, RANK INTEGER)");
-        sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME2 + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, CLASSINST TEXT, CLASSNAME TEXT, CLASSDESC TEXT, CLASSFITNESS TEXT, CLASSDAY TEXT, CLASSTIME TEXT, CLASSDIFF TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME2 + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, CLASSINST TEXT, CLASSNAME TEXT, CLASSDESC TEXT, CLASSFITNESS TEXT, CLASSDAY TEXT, CLASSTIME TEXT, CLASSDIFF TEXT, CLASSCAP TEXT)");
         sqLiteDatabase.execSQL("CREATE TABLE " + TABLE_NAME3 + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, FITNESSNAME TEXT, FITNESSDESC TEXT)");
     }
 
@@ -122,10 +142,48 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
+        //Validate check that adding this student doesn't overflow the class limit...
+
         contentValues.put(FITNESSNAME, fitnessname);
         contentValues.put(FITNESSDESC, fitnessdesc);
 
         long result = sqLiteDatabase.insert(TABLE_NAME3, null, contentValues);
+
+        if( result == -1 ) return false;
+
+        return true;
+    }
+
+    public boolean enrollStudent(String studentid, String classid)
+    {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(STUDENTID, studentid);
+        contentValues.put(ENROLLEDCLASSID, classid);
+
+        long result = sqLiteDatabase.insert(TABLE_NAME4, null, contentValues);
+
+        if( result == -1 ) return false;
+
+        return true;
+    }
+
+    public boolean unenrollStudent(String studentid, String classid)
+    {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(STUDENTID, studentid);
+        contentValues.put(ENROLLEDCLASSID, classid);
+
+        String query = "select * from " + TABLE_NAME4 + " where enrolledclassid = '" + classid + "' and studentid = '" + studentid + "'";
+
+        Cursor res = sqLiteDatabase.rawQuery(query, null);
+
+        if(res.getCount() == 0) return false;
+
+        long result = sqLiteDatabase.delete(TABLE_NAME4, "studentid = " + studentid + " and enrolledclassid = " + classid, null);
 
         if( result == -1 ) return false;
 
@@ -188,9 +246,54 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    public Cursor getStudentFromUsername(String username)
+    {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        String query = "select * from " + TABLE_NAME + " where username = '" + username + "'";
+        Cursor res = sqLiteDatabase.rawQuery(query, null);
+        return res;
+    }
+
+    public Cursor getStudentFromId(String studentid)
+    {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        String query = "select * from " + TABLE_NAME + " where id = '" + studentid + "'";
+        Cursor res = sqLiteDatabase.rawQuery(query, null);
+        return res;
+    }
+
     public Cursor getAllClassesByClass(String classname) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         String query = "select * from " + TABLE_NAME2 + " where classname = '" + classname + "'";
+        Cursor res = sqLiteDatabase.rawQuery(query, null);
+        return res;
+    }
+
+    public Cursor getAllClassesById(String classid) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        String query = "select * from " + TABLE_NAME2 + " where id = '" + classid + "'";
+        Cursor res = sqLiteDatabase.rawQuery(query, null);
+        return res;
+    }
+
+    public Cursor getEnrollmentsByClass(String classid)
+    {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        String query = "select * from " + TABLE_NAME4 + " where enrolledclassid = '" + classid + "'";
+        Cursor res = sqLiteDatabase.rawQuery(query, null);
+        return res;
+    }
+
+    public Cursor getEnrollmentsByStudent(String studentid) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        String query = "select * from " + TABLE_NAME4 + " where studentid = '" + studentid + "'";
+        Cursor res = sqLiteDatabase.rawQuery(query, null);
+        return res;
+    }
+
+    public Cursor getAllClassesByDay(String day) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        String query = "select * from " + TABLE_NAME2 + " where classday = '" + day + "'";
         Cursor res = sqLiteDatabase.rawQuery(query, null);
         return res;
     }

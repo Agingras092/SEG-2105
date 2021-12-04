@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 if(res.getString(5).equals("2") )
                 {
                     //GYM STUDENT CASE
-                    Intent myIntent = new Intent(MainActivity.this, InstructorMainActivity.class);
+                    Intent myIntent = new Intent(MainActivity.this, StudentMainActivity.class);
                     //Validate login
                     myIntent.putExtra("username", res.getString(1)); //Optional parameters
                     myIntent.putExtra("name", res.getString(3)); //Optional parameters

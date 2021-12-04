@@ -66,4 +66,26 @@ public class InstructorMainActivity extends MainActivity {
         InstructorMainActivity.this.startActivity(myIntent);
     }
 
+    public void myStudents(View view) {
+        Cursor res = myDB.getAllClasses();
+        Cursor res2, res3;
+        if(res.getCount() == 0) {
+            showMessage("Data", "No classes to display");
+        }
+        StringBuffer buffer = new StringBuffer();
+        while(res.moveToNext()) {
+            res2 = myDB.getEnrollmentsByClass(res.getString(0));
+            buffer.append("Class Name : " + res.getString(2)+"\n");
+            while(res2.moveToNext())
+            {
+                res3 = myDB.getStudentFromId(res2.getString(1));
+                res3.moveToNext();
+
+                buffer.append(res3.getString(3) + ", ");
+            }
+            buffer.append("________________________________________\n");
+        }
+        showMessage("Data", buffer.toString());
+    }
+
 }
